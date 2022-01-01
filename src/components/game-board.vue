@@ -45,25 +45,7 @@
 
 <script>
 import GameButton from './game-button.vue';
-
-const delay = (ms) => {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-};
-
-const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-const timeout = {
-  timer: null,
-  start: function(func) {
-    timeout.timer = setTimeout(func, 1000);
-  },
-
-  stop: function() {
-    clearTimeout(timeout.timer);
-  }
-};
+import { delay, random, timeout } from '../utils';
 
 export default {
   name: 'GameBoard',
