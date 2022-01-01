@@ -2,6 +2,8 @@
   <li 
     :class="`game-board__item game-board__item--${button}`"
     :value="value"
+    ref="button"
+    @click="handleClick"
   ></li>
 </template>
 
@@ -14,6 +16,25 @@ export default {
     },
     value: {
       type: Number,
+    },
+    action: {
+      type: Function,
+    }
+  },
+  methods: {
+    handleClick(evt) {
+      this.play();
+      this.action(evt.target.value);
+    },
+    play() {
+      const path = require(`@/assets/sounds/${this.$refs.button.value}.mp3`)
+      const playSound = new Audio(path);
+      playSound.play();
+
+      this.$refs.button.classList.add('active');
+      setTimeout(() => {
+        this.$refs.button.classList.remove('active');
+      }, 200);
     }
   }
 }
